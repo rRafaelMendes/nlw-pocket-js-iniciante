@@ -62,7 +62,9 @@ console.log(meta.value)
 
 //Não importa como a função foi criada, uma função é um valor.
 
+/*
 function criarMeta() {}
+*/
 
 //Há outra sintáxe muito simples e concisa para criar uma função a arrow function que é, de maneira muito simploria, uma função que aceita argumentos.
 /*
@@ -78,3 +80,15 @@ meta.isChecked(meta.checked)
 const criarMetas = () => {}
 */
 
+let meta = {
+    value: "Pedalar 5 dias na semana",
+    checked: true
+}
+let metas = [
+    meta,
+    {
+        value: "Correr 3 dias na semana",
+        checked: false
+    }
+]
+console.log(metas[0].checked)
