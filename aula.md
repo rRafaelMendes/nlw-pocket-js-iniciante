@@ -7,11 +7,11 @@ Como um lego, você irá utilizar peças para cxriar algoritmos, ou seja, para r
 
 ## Peças de uma Linguagem
 
-- Comentários
-- Declaração de variáveis (const, let)
-- Operadores (atribuição, concatenação, matemáticos, lógicos)
-- Tipos de Dados (string, number, boolean)
-- Estrutura de Dados (functions, object, array)
+- [x]Comentários
+- [x]Declaração de variáveis (const, let)
+- [x]Operadores (atribuição, concatenação, matemáticos, lógicos)
+- [x]Tipos de Dados (string, number, boolean)
+- [x]Estrutura de Dados (functions, object, array)
 - Controle de fluxo (if/else)
 - Estrutura de repetição (for/while)
 
@@ -23,36 +23,36 @@ Apresentar os Dados
 
 ## Escopo e Variáveis
 
-- Variáveis globais e locais
-- Constantes
+- [x]Variáveis globais e locais
+- [x]Constantes
 
 ## Tipos de Dados:
 
-- Strings(textos):"", '', ``.
-- Number: 2, 14.57, .45
-- Function
-- Boolean: true/false
+- [x]Strings(textos):"", '', ``.
+- [x]Number: 2, 14.57, .45
+- [x]Function
+- [x]Boolean: true/false
 
 ## Operadores
 
-- Operador de atribuição de valor
-- Operador de concatenação
+- [x]Operador de atribuição de valor
+- [x]Operador de concatenação
 
 ## Estrutura de Dados:
 
 ### Arrays: 
 
-Uma lista que contém qualquer tipo de dado
+- [x]Uma lista que contém qualquer tipo de dado
 
 
 ### Objetos:
 
-- Atributos e métodos
-- Criação e manipulação de objetos
-- Acesso a propriedades de objetos
+- [x]Atributos e métodos
+- [x]Criação e manipulação de objetos
+- [x]Acesso a propriedades de objetos
 
 ### Function
 
-- Criar, passar argumento
-- Executar
-- Arrow function / named function
+- [x]Criar, passar argumento
+- [x]Executar
+- [x]Arrow function / named function
