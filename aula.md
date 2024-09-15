@@ -12,8 +12,8 @@ Como um lego, você irá utilizar peças para cxriar algoritmos, ou seja, para r
 - [x]Operadores (atribuição, concatenação, matemáticos, lógicos)
 - [x]Tipos de Dados (string, number, boolean)
 - [x]Estrutura de Dados (functions, object, array)
-- Controle de fluxo (if/else)
-- Estrutura de repetição (for/while)
+- [x]Controle de fluxo (if/else)
+- [x]Estrutura de repetição (for/while)
 
 #  Fases de Resolução de um problema
 
@@ -35,8 +35,9 @@ Apresentar os Dados
 
 ## Operadores
 
-- [x]Operador de atribuição de valor
-- [x]Operador de concatenação
+- [x]Operador de atribuição de valor: "=" 
+- [x]Operador de concatenação: "+"
+- [x]Operadores de comparação: "= =" comparação, "! =" diferença, "<" menor que, ">" maior que, "< =" menor ou iguel que, "> =" maior ou igual que.
 
 ## Estrutura de Dados:
 
@@ -64,6 +65,7 @@ Apresentar os Dados
 # Condicionais
 
 - [x]switch
+- [x]if/else
 
 ## Módulos em Node.js
 - [x]Importação de módulos (require, CommonJS)

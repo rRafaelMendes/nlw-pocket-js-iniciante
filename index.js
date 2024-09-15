@@ -124,34 +124,45 @@ start()
 
 //Importação de Módulos e Biblioteca 'inquirer'
 
-const { select } = require('@inquirer/prompts')
+const { select, input } = require('@inquirer/prompts')
+//Sempre que uma função assíncrona for criada temos obrigatoriamente na frente do uso dela um "await"
 
+let meta = {
+    value: "Tomar 3 litros de água por dia.",
+    checek: false
+}
+
+let metas = [ meta ]
+
+
+const cadastrarMeta = async () => {
+    const meta = await input ({ messege: "Digite sua Meta:"})
+
+    if(meta.length == 0) {
+        console.log("A meta não pode ser vazia.")
+        return
+    }
+
+    metas.push({
+        value: meta,
+        checked: false
+     })
+    
+}
 const start = async () => {
 
     while(true){
-        
+        //await da constate start
         const opcao = await select({
             message: "Menu principal >",
-            choices: [
-                {
-                    name: "Cadastrar Meta", 
-                    value: "cadastrar"
-                },
-                {
-                    name: "Listar Metas",
-                    value: "listar"
-                },
-                {
-                    name: "Sair", 
-                    value: "sair"
-                }
-            ]
+
         })
     
 
         switch (opcao) {
             case "cadastrar":
-                console.log("Vamos Cadastrar")
+                await cadastrarMeta()
+                console.log(metas)
                 break
             case "listar":
                 console.log("Vamos Listar")
