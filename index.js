@@ -79,7 +79,7 @@ meta.isChecked(meta.checked)
 
 const criarMetas = () => {}
 */
-
+/*
 let meta = {
     value: "Pedalar 5 dias na semana",
     checked: true
@@ -92,3 +92,33 @@ let metas = [
     }
 ]
 console.log(metas[0].checked)
+*/
+/*
+function start() {
+    let count = 0
+    while (count < 10){
+        console.log(count)
+        count++ // count = count + 1
+    }
+}
+start()
+*/
+/*
+const start = () =>{
+    while(true){
+        let opcao = "cadastrar"
+        switch (opcao) {
+            case "cadastrar":
+                console.log("Vamos Cadastrar")
+                break
+            case "listar":
+                console.log("Vamos Listar")
+                break
+            case "sair":
+                return
+            }
+        }
+}
+start()
+*/
+

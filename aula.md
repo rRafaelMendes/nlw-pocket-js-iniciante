@@ -56,3 +56,11 @@ Apresentar os Dados
 - [x]Criar, passar argumento
 - [x]Executar
 - [x]Arrow function / named function
+
+# Estrutura de Repetição
+
+- [x]while
+
+# Condicionais
+
+- [x]switch
