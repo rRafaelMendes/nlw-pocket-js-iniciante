@@ -124,19 +124,19 @@ start()
 
 //Importação de Módulos e Biblioteca 'inquirer'
 
-const { select, input } = require('@inquirer/prompts')
+const { select, input, checkbox } = require('@inquirer/prompts')
 //Sempre que uma função assíncrona for criada temos obrigatoriamente na frente do uso dela um "await"
 
 let meta = {
     value: "Tomar 3 litros de água por dia.",
-    checek: false
+    checked: false
 }
 
 let metas = [ meta ]
 
 
 const cadastrarMeta = async () => {
-    const meta = await input ({ messege: "Digite sua Meta:"})
+    const meta = await input ({ message: "Digite sua Meta:"})
 
     if(meta.length == 0) {
         console.log("A meta não pode ser vazia.")
@@ -149,12 +149,80 @@ const cadastrarMeta = async () => {
      })
     
 }
+const listarMetas = async () => {
+    const respostas = await checkbox({
+        message: "Use as setas para mudar de meta, e espaço para marcar ou desmarcar e o Enter para finalizar essa etapa.",
+        choices:[...metas],
+        instructions: false,
+    })
+    if(respostas.length ==0 ) {
+        console.log("Nenhuma meta selecionada!")
+        return
+    }
+    
+    metas.forEach((m) =>{
+        m.checked = false
+    })
+
+    respostas.forEach((resposta) => {
+        const meta = metas.find((m) => {
+            return m.value == resposta
+        })
+
+        meta.checked = true
+
+    })
+    //Quero mudar pra quando for mais de uma meta ir para o plural.
+    console.log('Meta(s) concluida(s)')
+}
+
+const metasRealizadas = async () => {
+    const realizadas = metas.filter((meta) => {
+        return meta.checked
+    })
+
+    if(realizadas.length == 0) {
+        console.log("Não existem metas realizadas")
+        return
+    }
+
+    await select({
+        message: "Metas Realizadas",
+        choices: [...realizadas]
+    })
+}
 const start = async () => {
 
     while(true){
-        //await da constate start
+
         const opcao = await select({
             message: "Menu principal >",
+            choices: [
+                {
+                    name: "Cadastrar Meta",
+                    value: "cadastrar"
+                },
+                {
+                    name: "Listar Metas",
+                    value: "listar"
+                },
+                {
+                    name: "Metas Realizadas",
+                    value: "realizadas"
+                },
+                {
+                    name: "Metas Abertas",
+                    value: "abetas"
+                },
+                {
+                    name: "Deletar Metas",
+                    value: "deletar"
+                },
+                {
+                    name: "Sair",
+                    value: "sair"
+                }
+            ]
 
         })
     
@@ -165,7 +233,10 @@ const start = async () => {
                 console.log(metas)
                 break
             case "listar":
-                console.log("Vamos Listar")
+                await listarMetas()
+                break
+            case "realizadas":
+                await metasRealizadas()
                 break
             case "sair":
                 console.log("Até a próxima!")
