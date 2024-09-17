@@ -155,14 +155,15 @@ const listarMetas = async () => {
         choices:[...metas],
         instructions: false,
     })
+
+    metas.forEach((m) =>{
+        m.checked = false
+    })
+
     if(respostas.length ==0 ) {
         console.log("Nenhuma meta selecionada!")
         return
     }
-    
-    metas.forEach((m) =>{
-        m.checked = false
-    })
 
     respostas.forEach((resposta) => {
         const meta = metas.find((m) => {
@@ -187,10 +188,26 @@ const metasRealizadas = async () => {
     }
 
     await select({
-        message: "Metas Realizadas",
+        message: "Você tem " + realizadas.length + " meta(s) realizada(s)",
         choices: [...realizadas]
     })
 }
+
+const metasAbertas = async () => {
+    const aberta = metas.filter((meta) => {
+        return meta.checked != true
+
+    })
+    if(aberta.length == 0) {
+        console.log("Não exite meta aberta")
+        return
+    }
+    await select ({
+        message: "Você tem  " + aberta.length + " meta(s) aberta(s)",
+        choices: [...aberta]
+    })
+}
+
 const start = async () => {
 
     while(true){
@@ -212,7 +229,7 @@ const start = async () => {
                 },
                 {
                     name: "Metas Abertas",
-                    value: "abetas"
+                    value: "aberta"
                 },
                 {
                     name: "Deletar Metas",
@@ -232,12 +249,19 @@ const start = async () => {
                 await cadastrarMeta()
                 console.log(metas)
                 break
+
             case "listar":
                 await listarMetas()
                 break
+
             case "realizadas":
                 await metasRealizadas()
                 break
+
+            case "aberta":
+                await metasAbertas()
+                break
+
             case "sair":
                 console.log("Até a próxima!")
                 return
