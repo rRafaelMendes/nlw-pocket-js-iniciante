@@ -187,7 +187,7 @@ const metasRealizadas = async () => {
     })
 
     if(realizadas.length == 0) {
-        console.log("Não existem metas realizadas")
+        mensagem = "Não existem metas realizadas"
         return
     }
 
@@ -202,7 +202,7 @@ const metasAbertas = async () => {
         return meta.checked != true
     })
     if(aberta.length == 0) {
-        console.log("Não exite meta aberta")
+        mensagem = "Não exite meta aberta"
         return
     }
 
@@ -223,7 +223,7 @@ const deletarMetas = async() => {
     })
 
     if(itensDeletar.length == 0){
-        console.log("Nenhum item para ser deletado")
+        mensagem = "Nenhum item para ser deletado"
         return
     }
     itensDeletar.forEach((item) =>{
@@ -231,7 +231,7 @@ const deletarMetas = async() => {
             return meta.value != item
         })
     })
-    console.log("Meta(s) deleta(s) com sucesso!")
+    mensagem = "Meta(s) deletada(s) com sucesso!"
 }
 const mostrarMensagem = () => {
     console.clear()
@@ -303,7 +303,7 @@ const start = async () => {
                 break
 
             case "sair":
-                console.log("Até a próxima!")
+                mensagem = ("Até a próxima!")
                 return
             
         }
