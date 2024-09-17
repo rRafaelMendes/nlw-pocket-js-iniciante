@@ -125,16 +125,24 @@ start()
 //Importação de Módulos e Biblioteca 'inquirer'
 
 const { select, input, checkbox } = require('@inquirer/prompts')
+const fs = require("fs").promises
 
 let mensagem = "Bem-vindo ao App de Metas"
+let metas
 
-let meta = {
-    value: "Tomar 3 litros de água por dia.",
-    checked: false
+
+const carregarMetas = async () => {
+    try {
+        const dados = await fs.readFile["metas.json", "utf-8"]
+        metas = JSON.parse(dados)
+    }
+    catch(erro) {
+        metas = []
+    }
 }
-
-let metas = [ meta ]
-
+const salvarMetas = async () => {
+    await fs.writeFile("metas.json", JSON.stringify(metas, null, 2))
+}
 
 const cadastrarMeta = async () => {
     const meta = await input ({ message: "Digite sua Meta: "})
@@ -145,20 +153,22 @@ const cadastrarMeta = async () => {
         return
     }
 
-    metas.push({
-        value: meta,
-        checked: false
-     })
+    metas.push(
+        { value: meta, checked: false}
+    )
 
      mensagem = "Meta cadastrada com sucesso."
     
 }
 const listarMetas = async () => {
+    if(metas.length == 0) {
+        mensagem = "Não existem metas!"
+        return
+    }
     const respostas = await checkbox({
         message: "Use as setas para mudar de meta, e espaço para marcar ou desmarcar e o Enter para finalizar essa etapa.",
         choices:[...metas],
-        instructions: false,
-        
+        instructions: false,        
     })
     metas.forEach((m) =>{
         m.checked = false
@@ -182,6 +192,10 @@ const listarMetas = async () => {
 }
 
 const metasRealizadas = async () => {
+    if(metas.length == 0) {
+        mensagem = "Não exitem metas!"
+        return
+    }
     const realizadas = metas.filter((meta) => {
         return meta.checked
     })
@@ -198,6 +212,10 @@ const metasRealizadas = async () => {
 }
 
 const metasAbertas = async () => {
+    if(metas.length == 0) {
+        mensagem = "Não existem metas!"
+        return
+    }
     const aberta = metas.filter((meta) => {
         return meta.checked != true
     })
@@ -213,6 +231,10 @@ const metasAbertas = async () => {
     })
 }
 const deletarMetas = async() => {
+    if(metas.length == 0) {
+        mensagem = "Não existem metas!"
+        return
+    }
     const metasDesmarcadas = metas.map((meta) => {
         return { value: meta.value, checked: false }
     })
@@ -247,6 +269,7 @@ const start = async () => {
 
     while(true){
         mostrarMensagem()
+        carregarMetas()
 
         const opcao = await select({
             message: "Menu principal >",
