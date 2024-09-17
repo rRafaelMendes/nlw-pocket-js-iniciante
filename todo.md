@@ -3,5 +3,5 @@
     - Metas realizadas
     - Metas abertas
 - [x]Marcar/Desmarcar Metas realizadas
--  Remover Metas
+- [x]Remover Metas
 - Sistema de Mensagens

@@ -125,7 +125,8 @@ start()
 //Importação de Módulos e Biblioteca 'inquirer'
 
 const { select, input, checkbox } = require('@inquirer/prompts')
-//Sempre que uma função assíncrona for criada temos obrigatoriamente na frente do uso dela um "await"
+
+let mensagem = "Bem-vindo ao App de Metas"
 
 let meta = {
     value: "Tomar 3 litros de água por dia.",
@@ -136,10 +137,11 @@ let metas = [ meta ]
 
 
 const cadastrarMeta = async () => {
-    const meta = await input ({ message: "Digite sua Meta:"})
+    const meta = await input ({ message: "Digite sua Meta: "})
+
 
     if(meta.length == 0) {
-        console.log("A meta não pode ser vazia.")
+        mensagem = "A meta não pode ser vazia."
         return
     }
 
@@ -147,6 +149,8 @@ const cadastrarMeta = async () => {
         value: meta,
         checked: false
      })
+
+     mensagem = "Meta cadastrada com sucesso."
     
 }
 const listarMetas = async () => {
@@ -154,14 +158,14 @@ const listarMetas = async () => {
         message: "Use as setas para mudar de meta, e espaço para marcar ou desmarcar e o Enter para finalizar essa etapa.",
         choices:[...metas],
         instructions: false,
+        
     })
-
     metas.forEach((m) =>{
         m.checked = false
     })
 
     if(respostas.length ==0 ) {
-        console.log("Nenhuma meta selecionada!")
+        mensagem = "Nenhuma meta selecionada!"
         return
     }
 
@@ -174,7 +178,7 @@ const listarMetas = async () => {
 
     })
     //Quero mudar pra quando for mais de uma meta ir para o plural.
-    console.log('Meta(s) concluida(s)')
+    mensagem = 'Meta(s) concluida(s)'
 }
 
 const metasRealizadas = async () => {
@@ -188,7 +192,7 @@ const metasRealizadas = async () => {
     }
 
     await select({
-        message: "Você tem " + realizadas.length + " meta(s) realizada(s)",
+        message: "Você tem: " + realizadas.length + " meta(s) realizada(s)",
         choices: [...realizadas]
     })
 }
@@ -196,21 +200,53 @@ const metasRealizadas = async () => {
 const metasAbertas = async () => {
     const aberta = metas.filter((meta) => {
         return meta.checked != true
-
     })
     if(aberta.length == 0) {
         console.log("Não exite meta aberta")
         return
     }
+
+
     await select ({
         message: "Você tem  " + aberta.length + " meta(s) aberta(s)",
         choices: [...aberta]
     })
 }
+const deletarMetas = async() => {
+    const metasDesmarcadas = metas.map((meta) => {
+        return { value: meta.value, checked: false }
+    })
+    const itensDeletar = await checkbox({
+        message: "Selecione o item para deletar",
+        choices:[...metasDesmarcadas],
+        instructions: false,
+    })
+
+    if(itensDeletar.length == 0){
+        console.log("Nenhum item para ser deletado")
+        return
+    }
+    itensDeletar.forEach((item) =>{
+        metas = metas.filter((meta) =>{
+            return meta.value != item
+        })
+    })
+    console.log("Meta(s) deleta(s) com sucesso!")
+}
+const mostrarMensagem = () => {
+    console.clear()
+    if(mensagem != '') {
+        console.log(mensagem)
+        console.log('')
+        mensagem = ''
+    }
+
+}
 
 const start = async () => {
 
     while(true){
+        mostrarMensagem()
 
         const opcao = await select({
             message: "Menu principal >",
@@ -260,6 +296,10 @@ const start = async () => {
 
             case "aberta":
                 await metasAbertas()
+                break
+
+            case "deletar":
+                await deletarMetas()
                 break
 
             case "sair":
