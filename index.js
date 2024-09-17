@@ -266,10 +266,11 @@ const mostrarMensagem = () => {
 }
 
 const start = async () => {
+    await carregarMetas()
 
     while(true){
         mostrarMensagem()
-        carregarMetas()
+        await salvarMetas()
 
         const opcao = await select({
             message: "Menu principal >",
